@@ -1,21 +1,14 @@
 #include<bits/stdc++.h>
- 
-// Returns value of Permutation Coefficient P(n, k)
-int permutationCoeff(int n, int k)
+using namespace std;
+int Coff(int a, int b)
 {
-    int P[n+1][k+1];
- 
-    // Caculate value of Permutation Coefficient in
-    // bottom up manner
-    for (int i =0; i <= n; i++)
+    int P[a+1][b+1];
+    for (int i =0; i <= a; i++)
     {
-        for (int j = 0; j <= std::min(i,k); j++)
+        for (int j = 0; j <= std::min(i,b); j++)
         {
-            // Base Cases
             if (j == 0)
                 P[i][j] = 1;
- 
-            // Calculate value using previosly stored values
             else
                 P[i][j] = P[i-1][j] + (j*P[i-1][j-1]);
  
@@ -23,14 +16,13 @@ int permutationCoeff(int n, int k)
             P[i][j+1] = 0;
         }
     }
-    return P[n][k];
+    return P[a][b];
 }
- 
-// Driver program to test above function
 int main()
 {
-    int n = 10, k = 2;
-    printf("Value of P(%d, %d) is %d ",
-                        n, k, permutationCoeff(n, k) );
+    int n, k;
+    cout<<"Enter Value Of n = ";cin>>n;
+    cout<<"Enter Value Of m = ";cin>>k;
+    cout<<"Value of P("<< n <<", "<< k <<") is "<<Coff(n, k);
     return 0;
 }
