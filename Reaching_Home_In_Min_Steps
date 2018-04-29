@@ -1,0 +1,32 @@
+#include <bits/stdc++.h>
+using namespace std;
+     
+const int Dist = 10000, Steps = 100, modulo = 1000000000+7;
+int Count[Dist + 1][Steps + 1];
+     
+void CountWays()
+{ 
+    for(int i = 1;  i<= Steps; i++)
+    {
+        Count[0][i]=Count[1][i]=1;
+     	for(int j=2; j<=Dist; j++)
+        {
+            if(i>=j)
+            Count[j][i] = (2LL*Count[j-1][i])%modulo;
+            else
+            Count[j][i] = (2LL*Count[j-1][i]+modulo-Count[j-i-1][i])%modulo;
+        }
+    }
+}
+main()
+{
+    CountWays();
+    int TestCases;
+    cin>>TestCases;
+    while(TestCases--)
+    {
+        int distance, k;
+        cin>>distance>>k;
+        cout<<Count[distance][k];
+    }
+}
